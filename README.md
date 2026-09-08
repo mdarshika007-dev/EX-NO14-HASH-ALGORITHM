@@ -28,8 +28,72 @@ To implement HASH ALGORITHM
 
 ## Program:
 
+~~~
+#include <stdio.h>
+#include <string.h>
 
+unsigned long hashFunction(char str[])
+{
+    unsigned long hash = 5381;
+    int i;
+
+    for (i = 0; str[i] != '\0'; i++)
+    {
+        hash = ((hash << 5) + hash) + str[i];
+    }
+
+    return hash;
+}
+
+void displayHash(unsigned long hash)
+{
+    printf("\nHash Value: ");
+
+    printf("%08lx", hash);
+
+    printf("\n");
+}
+
+int main()
+{
+    char message[500];
+    unsigned long hashValue;
+
+    printf("========================================\n");
+    printf("          HASH ALGORITHM\n");
+    printf("========================================\n");
+
+    printf("\nEnter the message: ");
+    fgets(message, sizeof(message), stdin);
+
+    /* Remove newline character */
+    message[strcspn(message, "\n")] = '\0';
+
+    printf("\n----------------------------------------\n");
+    printf("Original Message : %s\n", message);
+    printf("Message Length   : %lu characters\n",
+           strlen(message));
+    printf("----------------------------------------\n");
+
+    /* Generate hash value */
+    hashValue = hashFunction(message);
+
+    /* Display hash */
+    displayHash(hashValue);
+
+    printf("\n----------------------------------------\n");
+    printf("Hash Generation : Successful\n");
+    printf("----------------------------------------\n");
+
+    printf("\n========================================\n");
+    printf("             END OF PROGRAM\n");
+    printf("========================================\n");
+
+    return 0;
+}
+~~~
 ## Output:
+![Uploading image.png…]()
 
 ## Result:
 The program is executed successfully.
